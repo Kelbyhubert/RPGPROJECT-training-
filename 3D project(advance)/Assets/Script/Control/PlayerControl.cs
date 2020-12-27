@@ -10,6 +10,7 @@ namespace RPG.Control
         
         
         private void Update() {
+            // membuat priority , jika click target yang bisa diserang maka prioritynya akan menjadi combatControl , jika tidak maka moveControl akan menjadi prioritynya
             // jika click target maka combatControl akan menjadi true dan melakukan method combat Control dan langsung return untuk tidak mengakses method moveControl
             // jika combatControl return false maka method combat control tidak ada dilakukan dan melakukan moveControl
             // jika klik diluar world maka player tidak akan melakukan apa apa
@@ -24,13 +25,13 @@ namespace RPG.Control
             //mengambil semua object yang terkena laser atau ray (tebus object) RaycastAll
             //memasukan semua informasi ke dalam array Raycasthit
             //looping dipake untuk mengambil informasi hit ke dalam target terus menerus 
-            //jika tidak ada target maka akan di skip index array tersebut
+            //jika tidak bisa diserang maka index tersebut akan di skip dan lanjut ke index selanjutnya
             //jika ada target dan click mouse 0 maka akan melakukan method attack 
             RaycastHit[] hitArrays = Physics.RaycastAll(getRay());
             foreach (RaycastHit hit in hitArrays)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if(target == null) continue;
+                if(!GetComponent<PlayerCombat>().canAttack(target)) continue;
 
                 if(Input.GetMouseButtonDown(0))
                 {
