@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
+    // harusnya nama class jadi combatMechanic 
     public class PlayerCombat : MonoBehaviour , IAction {
         
         [Header("Attack Setting")]
@@ -23,7 +24,10 @@ namespace RPG.Combat
         // health dari component target bukan component dari player
         Health target;
 
-        float lastSecondAttack = 0;
+        // agar player atau musuh langsung serang 
+        // bisa pake angka yang lebih dari attack time 
+        // pakai mathf.infinity agar langsung buat menjadi lebih besar daro attactTime
+        float lastSecondAttack = Mathf.Infinity;
 
         private void Update()
         {
@@ -57,9 +61,10 @@ namespace RPG.Combat
             return Vector3.Distance(target.transform.position, transform.position) < attackRange;
         }
 
-        public bool canAttack(CombatTarget combatTarget){
+        public bool canAttack(GameObject combatTarget){
 
-            //jika tidak ada target yang memiliki komponen combatTarget maka akan return false
+            //jika tidak ada gameObject maka akan return false
+            //jika ada maka akan diambil komponen health nya dari gameobject
             // jika ada dan belom mati maka akan return true
             // jika target sudah mati maka akan return false
             if(combatTarget == null) return false;
@@ -68,10 +73,10 @@ namespace RPG.Combat
             return tempTarget != null && !tempTarget.isDead();
         }
 
-        public void attack(CombatTarget target){
+        public void attack(GameObject target){
             // untuk memhentikan current action dan lalu menganti action menjadi action class ini
             // lalu memulai action di class ini 
-            // memasukan data target method ke dalam target di class ini dengan mengambil component health target
+            // memasukan data target dari gameobject ke dalam target di class ini dengan mengambil komponen health karena dataype untuk target pada class ini adalah health
             // mencari target yang memiliki component CombatTarget
             GetComponent<ActionScheduler>().StartAction(this);
             this.target = target.GetComponent<Health>();

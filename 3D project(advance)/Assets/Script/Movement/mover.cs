@@ -22,6 +22,8 @@ public class mover : MonoBehaviour , IAction
         updateAnimation();
     }
 
+    #region animation
+
     private void updateAnimation()
     {
         //ambil velocity global dari Navmesh
@@ -36,6 +38,9 @@ public class mover : MonoBehaviour , IAction
         GetComponent<Animator>().SetFloat("ForwardSpeed", triggerSpeed);
     }
 
+    #endregion
+
+    #region function utama
     public void cancelAction(){
         // buat movement nya berhenti
         GetComponent<NavMeshAgent>().isStopped = true;
@@ -55,6 +60,9 @@ public class mover : MonoBehaviour , IAction
         GetComponent<NavMeshAgent>().destination = destinations;
         GetComponent<NavMeshAgent>().isStopped = false;
     }
+        
+    #endregion
+
 }
     
 }

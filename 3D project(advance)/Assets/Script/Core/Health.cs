@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace RPG.Combat
+namespace RPG.Core
 {
     public class Health : MonoBehaviour {
         
@@ -16,15 +16,18 @@ namespace RPG.Combat
             //mathf.max untuk membuat value tidak bisa dibawah 0
             if(dead == true) return;
             totalHealth = Mathf.Max(totalHealth - amountOfDamage, 0);
-            Debug.Log("total Health : " + totalHealth);
+            Debug.Log(transform.name + " total Health : " + totalHealth);
             die();
         }
 
         private void die(){
+            
             if(totalHealth <= 0){
-                GetComponent<Animator>().SetTrigger("diaAnimTrigger");
-                // GetComponent<CapsuleCollider>().enabled = false;
                 dead = true;
+                GetComponent<Animator>().SetTrigger("diaAnimTrigger");
+                print(transform.name + " die");
+                GetComponent<ActionScheduler>().cancelCurrentAction();
+                // GetComponent<CapsuleCollider>().enabled = false;
             }
         }
     }

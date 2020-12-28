@@ -331,6 +331,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3410937873564335531, guid: 560d38c4f8437d04ba36ae9040445560,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6663256437811558001, guid: 560d38c4f8437d04ba36ae9040445560,
+        type: 3}
+      propertyPath: totalHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 560d38c4f8437d04ba36ae9040445560, type: 3}
 --- !u!1001 &154197780
@@ -2239,6 +2249,11 @@ PrefabInstance:
       propertyPath: totalHealth
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1986155493944484045, guid: b1e053c0e563c7342935f85e91de3903,
+        type: 3}
+      propertyPath: triggerRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2172467616794071172, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
       propertyPath: m_Name
@@ -2267,7 +2282,7 @@ PrefabInstance:
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
@@ -2277,7 +2292,7 @@ PrefabInstance:
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
@@ -2292,12 +2307,27 @@ PrefabInstance:
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2401855403026276043, guid: b1e053c0e563c7342935f85e91de3903,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810378860222831485, guid: b1e053c0e563c7342935f85e91de3903,
+        type: 3}
+      propertyPath: attackDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198077845676912816, guid: b1e053c0e563c7342935f85e91de3903,
+        type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7856694786577734494, guid: b1e053c0e563c7342935f85e91de3903,
+        type: 3}
+      propertyPath: totalHealth
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1e053c0e563c7342935f85e91de3903, type: 3}
