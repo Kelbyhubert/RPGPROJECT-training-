@@ -6,6 +6,7 @@ using System;
 
 namespace RPG.Control
 {
+    // class ini berfungsi untuk input data ke dalam method dari class lain yang diperlukan untuk gameObject 
     public class PlayerControl : MonoBehaviour 
     {
         Health health;
@@ -44,7 +45,7 @@ namespace RPG.Control
 
                 if(!GetComponent<PlayerCombat>().canAttack(target.gameObject)) continue;
 
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButton(0))
                 {
                     GetComponent<PlayerCombat>().attack(target.gameObject);
                 }

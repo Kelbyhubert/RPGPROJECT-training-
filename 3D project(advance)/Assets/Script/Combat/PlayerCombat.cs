@@ -8,6 +8,7 @@ using UnityEngine;
 namespace RPG.Combat
 {
     // harusnya nama class jadi combatMechanic 
+    // class ini untuk proses semua data yang masuk dari class control 
     public class PlayerCombat : MonoBehaviour , IAction {
         
         [Header("Attack Setting")]
