@@ -8,10 +8,12 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-public class mover : MonoBehaviour , IAction
-{
+    // class ini untuk proses semua data yang masuk dari class control 
+    public class mover : MonoBehaviour , IAction
+    {
     
     [SerializeField] Transform targetPos;
+    [SerializeField] float MaxSpeed = 6f;
     
     // Start is called before the first frame update
    
@@ -41,29 +43,33 @@ public class mover : MonoBehaviour , IAction
     #endregion
 
     #region function utama
+    
     public void cancelAction(){
         // buat movement nya berhenti
         GetComponent<NavMeshAgent>().isStopped = true;
     }
 
-    public void startMove(Vector3 destinations){
+    public void startMove(Vector3 destinations , float fractionSpeed){
         
         // untuk memhentikan current action dan lalu menganti action menjadi action class ini
         // lalu memulia action di class ini 
         GetComponent<ActionScheduler>().StartAction(this);
         
-        moveTo(destinations);
+        moveTo(destinations ,fractionSpeed);
     }
 
-    public void moveTo(Vector3 destinations){
-        // buat move berjalan
+    public void moveTo(Vector3 destinations , float fractionSpeed){
+            // buat move berjalan
+            // ubah speed dari navMeshAgent
+            //  Mathf.Clamp01 berfungsi return value dari 1 sampai 0 
         GetComponent<NavMeshAgent>().destination = destinations;
+        GetComponent<NavMeshAgent>().speed = MaxSpeed * Mathf.Clamp01(fractionSpeed);
         GetComponent<NavMeshAgent>().isStopped = false;
     }
         
     #endregion
 
-}
+    }
     
 }
 

@@ -67,7 +67,7 @@ namespace RPG.Control
             if (hashit)
             {
                 if(Input.GetMouseButton(0)){
-                    GetComponent<mover>().startMove(hit.point);
+                    GetComponent<mover>().startMove(hit.point ,1f);
                 }
                 return true;
             }

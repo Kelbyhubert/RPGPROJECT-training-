@@ -17,6 +17,8 @@ namespace RPG.Control
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float wayPointTolerance = 1f;
         [SerializeField] float wayPointDelayTime = 3f;
+        [Range(0,1)]
+        [SerializeField] float patrolSpeedFraction = 0.2f;
 
 
         PlayerCombat combatBehaviour;
@@ -113,7 +115,8 @@ namespace RPG.Control
 
             // jika wayPointDelay lebih besar dari wayPointDelayTime AI enemy baru akan pindah
             // jika tidak AI akan tunggu sampai time.deltatime yang dijumlahkan ke wayPointDelay mencapai wayPointDelayTime
-            if(wayPointDelay > wayPointDelayTime) GetComponent<mover>().startMove(nextPosition);
+            // jika AI enemy lagi patrol maka speed yang akan dikali hanya dari 1 sampai 0
+            if(wayPointDelay > wayPointDelayTime) GetComponent<mover>().startMove(nextPosition , patrolSpeedFraction);
         }
 
         private bool atCurrentWaypoint()
@@ -140,7 +143,7 @@ namespace RPG.Control
 
         private void AITimer()
         {
-            // mulai hitung
+            // mulai hitung timer
             timeLastSawPlayer += Time.deltaTime;
             wayPointDelay += Time.deltaTime;
         }

@@ -45,7 +45,8 @@ namespace RPG.Combat
 
             if (!rangeCalculate())
             {
-                GetComponent<mover>().moveTo(target.transform.position);
+                // default untuk speed itu 1f
+                GetComponent<mover>().moveTo(target.transform.position , 1f);
             }
             else
             {
@@ -98,6 +99,7 @@ namespace RPG.Combat
             // jika dibatalkan maka animasi serang akan di reset ( bug kecil )
             GetComponent<Animator>().ResetTrigger("attackAnimTrigger");
             GetComponent<Animator>().SetTrigger("cancelAttackTrigger");
+            GetComponent<mover>().cancelAction();
             this.target = null;
         }
 
