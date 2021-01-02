@@ -27,6 +27,7 @@ namespace RPG.Control
         int currentWaypointIndex = 0;
 
         Vector3 guardPosition;
+        float lookat;
         float timeLastSawPlayer = Mathf.Infinity;
         float wayPointDelay = Mathf.Infinity;
 
@@ -37,6 +38,7 @@ namespace RPG.Control
             health = GetComponent<Health>();
 
             guardPosition = transform.position;
+            
             
         }
 
@@ -69,6 +71,7 @@ namespace RPG.Control
             else
             {
                 PatrolBehaviour();
+                
 
             }
 

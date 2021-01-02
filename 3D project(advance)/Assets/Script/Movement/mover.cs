@@ -61,7 +61,7 @@ namespace RPG.Movement
     public void moveTo(Vector3 destinations , float fractionSpeed){
             // buat move berjalan
             // ubah speed dari navMeshAgent
-            //  Mathf.Clamp01 berfungsi return value dari 1 sampai 0 
+            // Mathf.Clamp01 berfungsi return value dari 1 sampai 0 
         GetComponent<NavMeshAgent>().destination = destinations;
         GetComponent<NavMeshAgent>().speed = MaxSpeed * Mathf.Clamp01(fractionSpeed);
         GetComponent<NavMeshAgent>().isStopped = false;
