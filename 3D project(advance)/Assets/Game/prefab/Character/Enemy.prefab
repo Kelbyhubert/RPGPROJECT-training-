@@ -129,6 +129,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bf9887119375fbf4984fd6485947cb29,
         type: 2}
+    - target: {fileID: 1495785377368042619, guid: 3189eb369872a9c408fab3a27dc1fd48,
+        type: 3}
+      propertyPath: DefaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: bf9887119375fbf4984fd6485947cb29,
+        type: 2}
     - target: {fileID: 3875071949347351410, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}
       propertyPath: MaxSpeed

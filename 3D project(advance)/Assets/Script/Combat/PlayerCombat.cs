@@ -13,7 +13,7 @@ namespace RPG.Combat
         
         
         [Header("Weapon Setting")]
-        [SerializeField] Weapon EWeapon = null;
+        [SerializeField] Weapon DefaultWeapon = null;
         [SerializeField] Transform hand_R_position = null;
         
         
@@ -21,10 +21,10 @@ namespace RPG.Combat
         //variable untuk test code attackComboAnimation();
         //List<string> animationList = new List<string>(new string[] {"attack1AnimTrigger","attack2AnimTrigger" });
         //int comboNumber = 0;
-        
-        
+
         // health dari component target bukan component dari player
         Health target;
+        Weapon currentWeapon;
 
         // agar player atau musuh langsung serang 
         // bisa pake angka yang lebih dari attack time 
@@ -33,7 +33,7 @@ namespace RPG.Combat
 
         private void Start() {
             //saat game mulai langsung pake weapon kalau ada
-            equipWeapon();
+            equipWeapon(DefaultWeapon);
         }
 
         
@@ -68,7 +68,7 @@ namespace RPG.Combat
         {
             // hitung selisih jarak target dengan player 
             // jika lebih kecil dari range maka akan return true
-            return Vector3.Distance(target.transform.position, transform.position) < EWeapon.getRange();
+            return Vector3.Distance(target.transform.position, transform.position) < currentWeapon.getRange();
         }
 
         public bool canAttack(GameObject combatTarget){
@@ -100,11 +100,11 @@ namespace RPG.Combat
         }
 
 
-        private void equipWeapon()
+        public void equipWeapon(Weapon EWeapon)
         {
             // jika tidak ada scripableobject maka akan return
             // jika ada maka akan dispawn di posisi tangan dan ngeoveride animasi serang
-            if(EWeapon == null) return;
+            currentWeapon = EWeapon;
             Animator anim = GetComponent<Animator>();
             EWeapon.spawnWeapon(hand_R_position,anim);
             
@@ -131,7 +131,7 @@ namespace RPG.Combat
             // method ini bisa dipake dalam game fps seperti firerate pada senjata atau bisa dipakai sebagai cooldown dari suatu skill
             // jika menyerang maka cancelattack akan di reset ( bug kecil )
             transform.LookAt(target.transform);
-            if (lastSecondAttack > EWeapon.getAttackTime())
+            if (lastSecondAttack > currentWeapon.getAttackTime())
             {
                 GetComponent<Animator>().ResetTrigger("cancelAttackTrigger");
                 GetComponent<Animator>().SetTrigger("attackAnimTrigger");
@@ -165,7 +165,7 @@ namespace RPG.Combat
             // jika animasi sudah sampai di durasi hit baru melakukan damage
             // mengambil komponen health dari target untuk melakukan method takeDamage
             if(target == null) return;
-            target.takeDamage(EWeapon.getDamage());
+            target.takeDamage(currentWeapon.getDamage());
         }
 
         #endregion
