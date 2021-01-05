@@ -47,10 +47,17 @@ namespace RPG.SceneManagement
                 DontDestroyOnLoad(gameObject);
 
                 yield return fader.fadeOut(fadeOutTime);
+
+                SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+                wrapper.Save();
                 yield return SceneManager.LoadSceneAsync(sceneIndex); 
+
+                wrapper.Load();
 
                 Portal otherPortal = getOtherPortal();
                 updatePlayerPosition(otherPortal);
+
+                wrapper.Save();
 
                 yield return new WaitForSeconds(fadeDelay);
                 yield return fader.fadeIn(fadeInTime);
@@ -66,7 +73,9 @@ namespace RPG.SceneManagement
             GameObject player = GameObject.FindWithTag("Player");
 
             // ini cara  dengan mengambil komponen NavMeshAgent dari player dengan Warp ke posisi spawn Point
+            player.GetComponent<NavMeshAgent>().enabled = false;
             player.GetComponent<NavMeshAgent>().Warp(otherPortal.spawnPoint.position);
+            player.GetComponent<NavMeshAgent>().enabled = true;
             // ini cara tanpa navmeshAgent
             // player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;

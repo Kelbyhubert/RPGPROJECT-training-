@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4968762597710058408}
   - component: {fileID: 4256551796205521473}
   - component: {fileID: 1495785377368042619}
+  - component: {fileID: 6076578607041184796}
   m_Layer: 0
   m_Name: Character1
   m_TagString: Untagged
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {fileID: 0}
+  MaxSpeed: 6
 --- !u!114 &-4968762597710058408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +156,16 @@ MonoBehaviour:
   attackRange: 2
   attactTime: 1
   attackDamage: 5
+--- !u!114 &6076578607041184796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198800212051847042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 

@@ -21,6 +21,8 @@ namespace RPG.Cinematics
 
         }
 
+        
+
 
         void disableControl(PlayableDirector pd){
             

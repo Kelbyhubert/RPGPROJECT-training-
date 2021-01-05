@@ -91,6 +91,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+--- !u!4 &596375786446248788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 461188, guid: 679ff741e12a7e740819ede24a7000b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 596375786446050000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6198077844986246918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +118,17 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1495785377368042619, guid: 3189eb369872a9c408fab3a27dc1fd48,
+        type: 3}
+      propertyPath: hand_R_position
+      value: 
+      objectReference: {fileID: 596375786446248788}
+    - target: {fileID: 1495785377368042619, guid: 3189eb369872a9c408fab3a27dc1fd48,
+        type: 3}
+      propertyPath: EWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: bf9887119375fbf4984fd6485947cb29,
+        type: 2}
     - target: {fileID: 3875071949347351410, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}
       propertyPath: MaxSpeed
@@ -120,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 5198800212051847042, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (2)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8599311456466659789, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}

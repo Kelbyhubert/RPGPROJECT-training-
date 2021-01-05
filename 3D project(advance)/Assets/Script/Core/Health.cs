@@ -1,16 +1,21 @@
+using RPG.Saving;
 using UnityEngine;
+
 
 
 namespace RPG.Core
 {
-    public class Health : MonoBehaviour {
+    public class Health : MonoBehaviour ,ISaveable
+    {
         
         [SerializeField] float totalHealth = 100;
         bool dead = false;
 
+
         public bool isDead(){
             return dead;
         }
+
 
         public void takeDamage(float amountOfDamage){
             //mathf.max untuk membuat value tidak bisa dibawah 0
@@ -29,6 +34,19 @@ namespace RPG.Core
                 GetComponent<ActionScheduler>().cancelCurrentAction();
                 // GetComponent<CapsuleCollider>().enabled = false;
             }
+        }
+
+
+        public object CaptureState()
+        {
+        // untuk mengambil data buat di Save
+            return totalHealth;
+        }
+        public void RestoreState(object state)
+        {
+        // mengubah value variable dari data yang di save file
+            this.totalHealth = (float)state;
+            die();
         }
     }
     

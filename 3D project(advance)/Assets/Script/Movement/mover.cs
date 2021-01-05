@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 using RPG.Core;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement
 {
     // class ini untuk proses semua data yang masuk dari class control 
-    public class mover : MonoBehaviour , IAction
+    public class mover : MonoBehaviour , IAction , ISaveable
     {
     
     [SerializeField] Transform targetPos;
@@ -66,8 +67,25 @@ namespace RPG.Movement
         GetComponent<NavMeshAgent>().speed = MaxSpeed * Mathf.Clamp01(fractionSpeed);
         GetComponent<NavMeshAgent>().isStopped = false;
     }
-        
-    #endregion
+
+
+        #endregion
+    
+    public object CaptureState()
+    {
+        // untuk mengambil data buat di Save
+        return new SerializableVector3(transform.position);
+    }
+
+    public void RestoreState(object state)
+    {
+        // mengubah value variable dari data yang di save file
+            SerializableVector3 _position = (SerializableVector3) state;
+            GetComponent<NavMeshAgent>().enabled = false;
+            transform.position = _position.ToVector();
+            GetComponent<NavMeshAgent>().enabled = true;
+             
+    }
 
     }
     

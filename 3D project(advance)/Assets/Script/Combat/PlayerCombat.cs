@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RPG.Movement;
 using RPG.Core;
 using UnityEngine;
-
+using System;
 
 namespace RPG.Combat
 {
@@ -11,10 +11,11 @@ namespace RPG.Combat
     // class ini untuk proses semua data yang masuk dari class control 
     public class PlayerCombat : MonoBehaviour , IAction {
         
-        [Header("Attack Setting")]
-        [SerializeField] float attackRange = 2f;
-        [SerializeField] float attactTime = 1f;
-        [SerializeField] float attackDamage = 5f;
+        
+        [Header("Weapon Setting")]
+        [SerializeField] Weapon EWeapon = null;
+        [SerializeField] Transform hand_R_position = null;
+        
         
 
         //variable untuk test code attackComboAnimation();
@@ -27,8 +28,15 @@ namespace RPG.Combat
 
         // agar player atau musuh langsung serang 
         // bisa pake angka yang lebih dari attack time 
-        // pakai mathf.infinity agar langsung buat menjadi lebih besar daro attactTime
+        // pakai mathf.infinity agar langsung buat menjadi lebih besar dari attactTime
         float lastSecondAttack = Mathf.Infinity;
+
+        private void Start() {
+            //saat game mulai langsung pake weapon kalau ada
+            equipWeapon();
+        }
+
+        
 
         private void Update()
         {
@@ -60,7 +68,7 @@ namespace RPG.Combat
         {
             // hitung selisih jarak target dengan player 
             // jika lebih kecil dari range maka akan return true
-            return Vector3.Distance(target.transform.position, transform.position) < attackRange;
+            return Vector3.Distance(target.transform.position, transform.position) < EWeapon.getRange();
         }
 
         public bool canAttack(GameObject combatTarget){
@@ -92,6 +100,17 @@ namespace RPG.Combat
         }
 
 
+        private void equipWeapon()
+        {
+            // jika tidak ada scripableobject maka akan return
+            // jika ada maka akan dispawn di posisi tangan dan ngeoveride animasi serang
+            if(EWeapon == null) return;
+            Animator anim = GetComponent<Animator>();
+            EWeapon.spawnWeapon(hand_R_position,anim);
+            
+        }
+
+
         #region animation
         //animation
         public void cancelAttack(){
@@ -112,7 +131,7 @@ namespace RPG.Combat
             // method ini bisa dipake dalam game fps seperti firerate pada senjata atau bisa dipakai sebagai cooldown dari suatu skill
             // jika menyerang maka cancelattack akan di reset ( bug kecil )
             transform.LookAt(target.transform);
-            if (lastSecondAttack > attactTime)
+            if (lastSecondAttack > EWeapon.getAttackTime())
             {
                 GetComponent<Animator>().ResetTrigger("cancelAttackTrigger");
                 GetComponent<Animator>().SetTrigger("attackAnimTrigger");
@@ -146,7 +165,7 @@ namespace RPG.Combat
             // jika animasi sudah sampai di durasi hit baru melakukan damage
             // mengambil komponen health dari target untuk melakukan method takeDamage
             if(target == null) return;
-            target.takeDamage(attackDamage);
+            target.takeDamage(EWeapon.getDamage());
         }
 
         #endregion
