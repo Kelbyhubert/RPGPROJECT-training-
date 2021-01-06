@@ -15,6 +15,7 @@ namespace RPG.Combat
         [Header("Weapon Setting")]
         [SerializeField] Weapon DefaultWeapon = null;
         [SerializeField] Transform hand_R_position = null;
+        [SerializeField] Transform hand_L_position = null;
         
         
 
@@ -31,8 +32,8 @@ namespace RPG.Combat
         // pakai mathf.infinity agar langsung buat menjadi lebih besar dari attactTime
         float lastSecondAttack = Mathf.Infinity;
 
-        private void Start() {
-            //saat game mulai langsung pake weapon kalau ada
+        private void Awake() {
+            //saat game mulai langsung pake weapon defaultWeapon
             equipWeapon(DefaultWeapon);
         }
 
@@ -102,11 +103,11 @@ namespace RPG.Combat
 
         public void equipWeapon(Weapon EWeapon)
         {
-            // jika tidak ada scripableobject maka akan return
+            // jika ada senjata baru yang dipake maka currentWeapon akan diganti menjadi yang baru dipakai (script ambil weapon di tanah ada di PickUpItem)
             // jika ada maka akan dispawn di posisi tangan dan ngeoveride animasi serang
             currentWeapon = EWeapon;
             Animator anim = GetComponent<Animator>();
-            EWeapon.spawnWeapon(hand_R_position,anim);
+            EWeapon.spawnWeapon(hand_R_position,hand_L_position,anim);
             
         }
 
@@ -160,12 +161,27 @@ namespace RPG.Combat
         //     }
         // }
 
+        //method dari animasi mukul
         void Hit(){
             // jika tidak ada target maka tidak akan melakukan method takeDamage (untuk menhindari null object exception doang (bug))
+            // jika tidak ada projectile maka tidak akan memlakukan launchProjectile
             // jika animasi sudah sampai di durasi hit baru melakukan damage
             // mengambil komponen health dari target untuk melakukan method takeDamage
             if(target == null) return;
-            target.takeDamage(currentWeapon.getDamage());
+            if(currentWeapon.hasProjectile())
+            {
+                // mengambil data combat dari posisi tangan dan target
+                currentWeapon.launchProjectile(hand_R_position,hand_L_position,target);
+            }
+            else
+            {
+                target.takeDamage(currentWeapon.getDamage());
+            }
+        }
+        
+        //method dari animasi memanah
+        void Shoot(){
+            Hit();
         }
 
         #endregion

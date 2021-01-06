@@ -31,7 +31,7 @@ namespace RPG.Movement
     {
         //ambil velocity global dari Navmesh
         //ubah jadi local karena animasi hanya butuh tau kalau di jalan atau enggak (inverse)
-        //udah vector local velocity ke float
+        //ubah vector local velocity ke float dengan ambil salah satu arahnya
         //pake setfloat untuk trigger animasi
 
         Vector3 globalVelocity = GetComponent<NavMeshAgent>().velocity;

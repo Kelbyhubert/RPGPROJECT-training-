@@ -22,33 +22,42 @@ namespace RPG.Core
             if(dead == true) return;
             totalHealth = Mathf.Max(totalHealth - amountOfDamage, 0);
             Debug.Log(transform.name + " total Health : " + totalHealth);
+
+            if(totalHealth <= 0){
             die();
+            }
         }
 
         private void die(){
             
-            if(totalHealth <= 0){
+            if(dead) return;
+                
                 dead = true;
                 GetComponent<Animator>().SetTrigger("diaAnimTrigger");
                 print(transform.name + " die");
                 GetComponent<ActionScheduler>().cancelCurrentAction();
                 // GetComponent<CapsuleCollider>().enabled = false;
             }
-        }
-
-
         public object CaptureState()
         {
         // untuk mengambil data buat di Save
             return totalHealth;
         }
+
         public void RestoreState(object state)
         {
         // mengubah value variable dari data yang di save file
             this.totalHealth = (float)state;
-            die();
+            if (totalHealth <= 0)
+            {
+                die();
+               
+            }
         }
+        }
+
+
     }
     
-}
+
 
