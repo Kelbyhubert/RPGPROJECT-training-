@@ -60,9 +60,7 @@ namespace RPG.Control
 
             if (inRange() && combatBehaviour.canAttack(player))
             {
-
                 attackBehaviour();
-
             }
             else if (timeLastSawPlayer < searchForPlayerTime)
             {
@@ -71,8 +69,6 @@ namespace RPG.Control
             else
             {
                 PatrolBehaviour();
-                
-
             }
 
             AITimer();

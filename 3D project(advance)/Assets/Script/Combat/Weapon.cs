@@ -1,3 +1,4 @@
+using System;
 using RPG.Core;
 using UnityEngine;
 
@@ -16,17 +17,26 @@ namespace RPG.Combat
         [SerializeField] bool leftHandedWeapon = false;
         [SerializeField] Projectile projectile = null;
 
+        const string weaponName = "Weapon";
+
         public void spawnWeapon(Transform handRPosition, Transform handLPosition, Animator weaponAnimation){
+            // menghancurkan senjata lama dengan memasukan posisi senjata agar di cari posisi mana yang ada senjata
+            // jika object sudah di instantiate maka weapon name akan berubah menjadi nama constant
             // jika tidak ada weapon prefab maka tidak akan melakukan method ini 
             // sama juga dengan weapon prefab jika tidak ada animasi maka tidak akan override animasi
             // jika ada dan weapon nya adalah lefthanded maka posisi yang diambil dalah handLPosition jika tidak maka handRPosition
             // habis itu buat gameobject ke dalam game
+
+            DestroyOldWeapon(handRPosition,handLPosition);
+
             if(weaponPrefab != null)
             {
                 Transform handPosition = getTransform(handRPosition, handLPosition);
 
-                Instantiate(weaponPrefab, handPosition);
+                GameObject weapon = Instantiate(weaponPrefab, handPosition);
+                weapon.name = weaponName;
             }
+            
             var overrideController = weaponAnimation.runtimeAnimatorController as AnimatorOverrideController;
             if (overrideAnimation != null){
                 weaponAnimation.runtimeAnimatorController = overrideAnimation;
@@ -34,6 +44,22 @@ namespace RPG.Combat
             {
                 weaponAnimation.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
+        }
+
+        private void DestroyOldWeapon(Transform handRPosition, Transform handLPosition)
+        {
+            // cari nama senjata di handRPosition dulu
+            // jika ada maka oldWeapon tidak akan null dan melewati ifnya semua dan langsung menganti nama dan menghancurkan gameObjectnya
+            // jika tidak ada maka hasil akan null lalu masuk di if yang pertama , jika ada maka oldweapon tidak akan menjadi null lalu lanjut menganti nama dan menghancurkan gameObjectnya
+            // jika saat di if pertama juga null maka akan di return langsung
+            Transform oldWeapon = handRPosition.Find(weaponName);
+            if(oldWeapon == null){
+                oldWeapon = handLPosition.Find(weaponName);
+            }
+            if(oldWeapon == null) return;
+
+            oldWeapon.name = "Destroy";
+            Destroy(oldWeapon.gameObject);
         }
 
         private Transform getTransform(Transform handRPosition, Transform handLPosition)

@@ -38,6 +38,7 @@ namespace RPG.Core
                 GetComponent<ActionScheduler>().cancelCurrentAction();
                 // GetComponent<CapsuleCollider>().enabled = false;
             }
+            
         public object CaptureState()
         {
         // untuk mengambil data buat di Save

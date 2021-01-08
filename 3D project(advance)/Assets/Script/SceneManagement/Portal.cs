@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using RPG.Core;
 using System;
 
 namespace RPG.SceneManagement
@@ -22,7 +23,21 @@ namespace RPG.SceneManagement
             [SerializeField] float fadeInTime = 2f;
             [SerializeField] float fadeOutTime = 3f;
             [SerializeField] float fadeDelay = 0.5f;
+            // [SerializeField] GameObject[] enemyTrigger = null;
             
+
+
+            // int checkEnemy(){
+            //     int count = 0;
+            //     foreach (GameObject enemy in enemyTrigger)
+            //     {
+            //         if(enemy.GetComponent<Health>().isDead()){
+            //             count++;
+            //         }
+            //     }
+
+            //     return count;
+            // }
 
 
             private void OnTriggerEnter(Collider other) {

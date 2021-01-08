@@ -4,12 +4,13 @@ using RPG.Movement;
 using RPG.Core;
 using UnityEngine;
 using System;
+using RPG.Saving;
 
 namespace RPG.Combat
 {
     // harusnya nama class jadi combatMechanic 
     // class ini untuk proses semua data yang masuk dari class control 
-    public class PlayerCombat : MonoBehaviour , IAction {
+    public class PlayerCombat : MonoBehaviour , IAction , ISaveable {
         
         
         [Header("Weapon Setting")]
@@ -34,7 +35,10 @@ namespace RPG.Combat
 
         private void Awake() {
             //saat game mulai langsung pake weapon defaultWeapon
-            equipWeapon(DefaultWeapon);
+            // jika currentWeapon null ( maksudnya jika load dari save file dan currentWeapon itu null) maka akan pake DefaultWeapon
+            if(currentWeapon == null){
+                equipWeapon(DefaultWeapon);
+            }
         }
 
         
@@ -184,7 +188,21 @@ namespace RPG.Combat
             Hit();
         }
 
+
         #endregion
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            //harus buat folder resourses dan semua scripable object masukan ke folder tersebut 
+            // hanya scripable object karena ntr scripable object akan sendiri memanggil animasi dan attribute dia sendiri
+            string weaponName = (string)state;
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            equipWeapon(weapon);
+        }
     }
 
     
