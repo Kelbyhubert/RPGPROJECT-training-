@@ -5,6 +5,7 @@ using RPG.Core;
 using UnityEngine;
 using System;
 using RPG.Saving;
+using RPG.Resources;
 
 namespace RPG.Combat
 {
@@ -115,6 +116,10 @@ namespace RPG.Combat
             
         }
 
+        public Health getTarget(){
+            return target;
+        }
+
 
         #region animation
         //animation
@@ -171,15 +176,16 @@ namespace RPG.Combat
             // jika tidak ada projectile maka tidak akan memlakukan launchProjectile
             // jika animasi sudah sampai di durasi hit baru melakukan damage
             // mengambil komponen health dari target untuk melakukan method takeDamage
+            // whoattack akan mengambil gameobject(tuju ke gameobject sendiri) yang sedang menyerang target
             if(target == null) return;
             if(currentWeapon.hasProjectile())
             {
                 // mengambil data combat dari posisi tangan dan target
-                currentWeapon.launchProjectile(hand_R_position,hand_L_position,target);
+                currentWeapon.launchProjectile(hand_R_position,hand_L_position,target , gameObject);
             }
             else
             {
-                target.takeDamage(currentWeapon.getDamage());
+                target.takeDamage(currentWeapon.getDamage() , gameObject);
             }
         }
         
@@ -200,7 +206,7 @@ namespace RPG.Combat
             //harus buat folder resourses dan semua scripable object masukan ke folder tersebut 
             // hanya scripable object karena ntr scripable object akan sendiri memanggil animasi dan attribute dia sendiri
             string weaponName = (string)state;
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             equipWeapon(weapon);
         }
     }

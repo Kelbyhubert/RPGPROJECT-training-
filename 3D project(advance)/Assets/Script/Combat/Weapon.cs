@@ -1,5 +1,6 @@
 using System;
 using RPG.Core;
+using RPG.Resources;
 using UnityEngine;
 
 
@@ -83,13 +84,14 @@ namespace RPG.Combat
             return projectile != null;
         }
 
-        public void launchProjectile(Transform handRPosition, Transform handLPosition , Health target){
+        public void launchProjectile(Transform handRPosition, Transform handLPosition , Health target , GameObject whoAttack){
             // method ini buat Instantiate arrow untuk mengikuti target dan arrow keluar dari posisi yang sudah ditentukan
             // set target sesuai dengan yang di click ( di playerCombat)
+            // whoAttack untuk cari tau sapa yang serang
             Projectile Lprojectile = Instantiate(projectile,
                                                 getTransform(handRPosition,handLPosition).position,
                                                 Quaternion.identity);
-            Lprojectile.setTarget(target,weaponDamage);
+            Lprojectile.setTarget(target,weaponDamage,whoAttack);
         }
 
         // buat ambil stat dari data senjata

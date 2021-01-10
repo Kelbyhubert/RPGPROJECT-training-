@@ -16,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &692313033573848808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3410937873564335531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ab6d0ef72f97b489f0bbb12f5b48f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EXPoint: 0
 --- !u!114 &8556746895531347699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +121,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4968762597710058408, guid: 3189eb369872a9c408fab3a27dc1fd48,
+        type: 3}
+      propertyPath: totalHealth
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1495785377368042619, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}
       propertyPath: hand_R
@@ -141,6 +159,11 @@ PrefabInstance:
       propertyPath: hand_L_position
       value: 
       objectReference: {fileID: 6588157675851726397}
+    - target: {fileID: 4307965350146398668, guid: 3189eb369872a9c408fab3a27dc1fd48,
+        type: 3}
+      propertyPath: characterClass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5198800212051847042, guid: 3189eb369872a9c408fab3a27dc1fd48,
         type: 3}
       propertyPath: m_Name

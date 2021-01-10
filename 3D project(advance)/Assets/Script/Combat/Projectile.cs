@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using RPG.Core;
+using RPG.Resources;
 using UnityEngine;
 
 
@@ -18,6 +19,7 @@ namespace RPG.Combat
         [SerializeField] GameObject[] impactObject = null;
         [SerializeField] float lifeTime = 10f;
         [SerializeField] float lifeAfterImpact = 2;
+        GameObject whoAttack = null;
 
         private void Start() {
             transform.LookAt(getTargetPosition()); 
@@ -35,9 +37,10 @@ namespace RPG.Combat
         }
 
         // set target ke target yang diclick
-        public void setTarget(Health target , float damage){
+        public void setTarget(Health target , float damage , GameObject whoAttack){
             this.target = target;
             this.damage = damage;
+            this.whoAttack = whoAttack;
 
             Destroy(gameObject,lifeTime);
         }
@@ -61,7 +64,7 @@ namespace RPG.Combat
             // jika tidak maka akan destroy object projectile ini
             if(other.GetComponent<Health>() != target) return;
             if(target.isDead()) return;
-            target.takeDamage(damage);
+            target.takeDamage(damage,whoAttack);
 
             speed = 0;
             if(impactEffect != null){
